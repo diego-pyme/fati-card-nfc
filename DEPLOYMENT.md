@@ -8,7 +8,14 @@ Use this URL for the NFC card:
 https://card.fatiapp.cl
 ```
 
-The root route `/` renders the compact no-scroll card. The longer reference version is available at:
+The root route `/` renders Diego's compact no-scroll card. Tomas and Martin use the same compact card layout at:
+
+```text
+https://card.fatiapp.cl/tomas
+https://card.fatiapp.cl/martin
+```
+
+The longer reference version for Diego is available at:
 
 ```text
 https://card.fatiapp.cl/full
@@ -67,7 +74,10 @@ exports/fati-card-static.png
 ## NFC QA Checklist
 
 - Open `https://card.fatiapp.cl` on iPhone Safari.
+- Open `https://card.fatiapp.cl/tomas` on iPhone Safari.
+- Open `https://card.fatiapp.cl/martin` on iPhone Safari.
 - Open `https://card.fatiapp.cl` on Android Chrome.
+- Confirm each route shows the correct name.
 - Test WhatsApp opens `+56940017720`.
 - Test Instagram opens `https://www.instagram.com/fatiapp_/`.
 - Test Facebook opens `https://www.facebook.com/profile.php?id=61579667966882`.

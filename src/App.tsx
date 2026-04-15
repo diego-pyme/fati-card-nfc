@@ -11,6 +11,11 @@ import { cn } from "@/lib/utils";
 
 type CardMode = "default" | "static";
 
+type Profile = {
+  name: string;
+  role: string;
+};
+
 type SocialLink = {
   label: string;
   description: string;
@@ -18,6 +23,21 @@ type SocialLink = {
   icon: ComponentType<{ className?: string }>;
   placeholder?: boolean;
 };
+
+const profiles = {
+  diego: {
+    name: "Diego Penaloza",
+    role: "Fundador",
+  },
+  tomas: {
+    name: "Tomas Peñaloza",
+    role: "Fundador",
+  },
+  martin: {
+    name: "Martin Peñaloza",
+    role: "Fundador",
+  },
+} satisfies Record<string, Profile>;
 
 const pills = ["Clientes", "Servicios", "Proveedores"];
 const whatsappHref =
@@ -73,12 +93,25 @@ const socialLinks: SocialLink[] = [
   },
 ];
 
-function getCardMode(): CardMode {
+function getCardRoute(): { mode: CardMode; profile: Profile } {
   const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
-  return pathname === "/full" ? "default" : "static";
+
+  if (pathname === "/full") {
+    return { mode: "default", profile: profiles.diego };
+  }
+
+  if (pathname === "/tomas") {
+    return { mode: "static", profile: profiles.tomas };
+  }
+
+  if (pathname === "/martin") {
+    return { mode: "static", profile: profiles.martin };
+  }
+
+  return { mode: "static", profile: profiles.diego };
 }
 
-function FatiCard({ mode }: { mode: CardMode }) {
+function FatiCard({ mode, profile }: { mode: CardMode; profile: Profile }) {
   const isStatic = mode === "static";
 
   return (
@@ -149,9 +182,9 @@ function FatiCard({ mode }: { mode: CardMode }) {
           </div>
 
           <div className={cn("identity-chip", isStatic && "px-3 py-1.5 text-[0.76rem]")}>
-            <span className="identity-name">Diego Penaloza</span>
+            <span className="identity-name">{profile.name}</span>
             <span className="identity-dot" aria-hidden="true" />
-            <span className="identity-role">Fundador</span>
+            <span className="identity-role">{profile.role}</span>
           </div>
         </section>
 
@@ -366,7 +399,7 @@ function FatiCard({ mode }: { mode: CardMode }) {
 }
 
 function App() {
-  const mode = getCardMode();
+  const { mode, profile } = getCardRoute();
   const isStatic = mode === "static";
 
   return (
@@ -403,7 +436,7 @@ function App() {
           isStatic ? "min-h-[100dvh] px-2.5 py-2" : "min-h-screen px-4 py-6",
         )}
       >
-        <FatiCard mode={mode} />
+        <FatiCard mode={mode} profile={profile} />
       </main>
     </div>
   );
