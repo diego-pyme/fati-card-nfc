@@ -23,9 +23,14 @@ Settings:
 ```text
 Framework preset: Vite
 Build command: corepack pnpm build
+Deploy command: leave empty
 Build output directory: dist
 Root directory: /
 ```
+
+Cloudflare Pages Git deployments should publish the `dist` folder automatically after the build. Do not add `npx wrangler pages deploy ...` as a deploy command in this flow.
+
+If Cloudflare makes the deploy command mandatory, you are probably in the Workers deploy flow instead of the Pages static site flow. Go back and create/select a Pages project connected to GitHub.
 
 If the build environment does not enable Corepack automatically, use:
 
