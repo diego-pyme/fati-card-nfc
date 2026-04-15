@@ -8,11 +8,12 @@ Use this URL for the NFC card:
 https://card.fatiapp.cl
 ```
 
-The root route `/` renders Diego's compact no-scroll card. Tomas and Martin use the same compact card layout at:
+The root route `/` renders Diego's compact no-scroll card. Tomas, Martin, and Rodrigo use the same compact card layout at:
 
 ```text
 https://card.fatiapp.cl/tomas
 https://card.fatiapp.cl/martin
+https://card.fatiapp.cl/rodrigo
 ```
 
 The longer reference version for Diego is available at:
@@ -76,6 +77,7 @@ exports/fati-card-static.png
 - Open `https://card.fatiapp.cl` on iPhone Safari.
 - Open `https://card.fatiapp.cl/tomas` on iPhone Safari.
 - Open `https://card.fatiapp.cl/martin` on iPhone Safari.
+- Open `https://card.fatiapp.cl/rodrigo` on iPhone Safari.
 - Open `https://card.fatiapp.cl` on Android Chrome.
 - Confirm each route shows the correct name.
 - Test WhatsApp opens `+56940017720`.

@@ -37,6 +37,10 @@ const profiles = {
     name: "Martin Peñaloza",
     role: "Fundador",
   },
+  rodrigo: {
+    name: "Rodrigo Peñaloza",
+    role: "Asesor Comercial Senior",
+  },
 } satisfies Record<string, Profile>;
 
 const pills = ["Clientes", "Servicios", "Proveedores"];
@@ -106,6 +110,10 @@ function getCardRoute(): { mode: CardMode; profile: Profile } {
 
   if (pathname === "/martin") {
     return { mode: "static", profile: profiles.martin };
+  }
+
+  if (pathname === "/rodrigo") {
+    return { mode: "static", profile: profiles.rodrigo };
   }
 
   return { mode: "static", profile: profiles.diego };
