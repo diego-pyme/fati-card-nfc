@@ -190,10 +190,10 @@ body::before {
       linear-gradient(180deg, rgba(255, 255, 255, 0.048), rgba(255, 255, 255, 0.03));
   }
 
-  .shortcut-card-purple {
-    border-color: rgba(151, 85, 255, 0.24);
+  .shortcut-card-blue {
+    border-color: rgba(74, 143, 255, 0.24);
     background:
-      radial-gradient(circle at 18% 12%, rgba(151, 85, 255, 0.1), transparent 36%),
+      radial-gradient(circle at 18% 12%, rgba(74, 143, 255, 0.11), transparent 36%),
       linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.025));
   }
 
@@ -213,8 +213,8 @@ body::before {
     background: rgba(53, 238, 88, 0.08);
   }
 
-  .shortcut-icon-purple {
-    border-color: rgba(151, 85, 255, 0.24);
-    background: rgba(151, 85, 255, 0.08);
+  .shortcut-icon-blue {
+    border-color: rgba(74, 143, 255, 0.24);
+    background: rgba(74, 143, 255, 0.08);
   }
 }

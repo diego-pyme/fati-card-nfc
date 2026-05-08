@@ -2,6 +2,7 @@ import type { ComponentType, SVGProps } from "react";
 import {
   ArrowUpRight,
   Download,
+  Globe,
   MessageCircle,
   Sparkles,
 } from "lucide-react";
@@ -44,6 +45,9 @@ const profiles = {
 } satisfies Record<string, Profile>;
 
 const pills = ["Clientes", "Servicios", "Proveedores"];
+const appleAppStoreHref = "https://apps.apple.com/cl/app/fati/id6755729509";
+const webFallbackHref = "https://web.fatiapp.cl/";
+const googlePlayHref: string | null = null;
 const whatsappHref =
   "https://wa.me/56940017720?text=Hola%20Fati%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20la%20app.";
 
@@ -90,12 +94,30 @@ const socialLinks: SocialLink[] = [
     icon: FacebookGlyph,
   },
   {
-    label: "Descargar",
-    description: "Proximamente.",
-    icon: Download,
-    placeholder: true,
+    label: "Web",
+    description: "Sitio oficial.",
+    href: webFallbackHref,
+    icon: Globe,
   },
 ];
+
+function getDownloadHref(): string {
+  const ua = window.navigator.userAgent;
+  const isApple =
+    /iPhone|iPad|iPod/i.test(ua) ||
+    (/Macintosh/i.test(ua) && window.navigator.maxTouchPoints > 1);
+  const isAndroid = /Android/i.test(ua);
+
+  if (isApple) {
+    return appleAppStoreHref;
+  }
+
+  if (isAndroid) {
+    return googlePlayHref ?? webFallbackHref;
+  }
+
+  return webFallbackHref;
+}
 
 function getCardRoute(): { mode: CardMode; profile: Profile } {
   const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
@@ -119,7 +141,15 @@ function getCardRoute(): { mode: CardMode; profile: Profile } {
   return { mode: "static", profile: profiles.diego };
 }
 
-function FatiCard({ mode, profile }: { mode: CardMode; profile: Profile }) {
+function FatiCard({
+  mode,
+  profile,
+  downloadHref,
+}: {
+  mode: CardMode;
+  profile: Profile;
+  downloadHref: string;
+}) {
   const isStatic = mode === "static";
 
   return (
@@ -145,16 +175,6 @@ function FatiCard({ mode, profile }: { mode: CardMode; profile: Profile }) {
               <Text as="p" className="section-kicker">
                 Fati Card
               </Text>
-              <Heading
-                as="h2"
-                size="4"
-                className={cn(
-                  "tracking-[0.28em] text-white",
-                  isStatic && "text-[1rem] tracking-[0.26em]",
-                )}
-              >
-                FATI
-              </Heading>
             </div>
           </div>
         </header>
@@ -167,12 +187,11 @@ function FatiCard({ mode, profile }: { mode: CardMode; profile: Profile }) {
               className={cn(
                 "text-white",
                 isStatic
-                  ? "max-w-[13ch] text-[2.05rem] leading-[0.92] tracking-[-0.09em]"
-                  : "max-w-[12ch] text-[2.35rem] leading-[0.94] tracking-[-0.085em] sm:text-[2.55rem]",
+                  ? "max-w-[9.25em] text-[2.05rem] leading-[0.92] tracking-[-0.09em]"
+                  : "max-w-[9em] text-[2.35rem] leading-[0.94] tracking-[-0.085em] sm:text-[2.55rem]",
               )}
             >
-              Descarga y descubre la experiencia{" "}
-              <span className="brand-gradient-text">Fati.</span>
+              Descarga y descubre la experiencia
             </Heading>
 
             <Text
@@ -198,11 +217,9 @@ function FatiCard({ mode, profile }: { mode: CardMode; profile: Profile }) {
 
         <div className={cn("grid grid-cols-2 gap-3", isStatic && "gap-2.5")}>
           <a
-            aria-disabled="true"
-            tabIndex={-1}
+            href={downloadHref}
             className={cn(
               buttonVariants({ variant: "primary" }),
-              "pointer-events-none select-none",
               isStatic && "min-h-12 rounded-[18px] px-3 text-[0.86rem]",
             )}
           >
@@ -307,13 +324,13 @@ function FatiCard({ mode, profile }: { mode: CardMode; profile: Profile }) {
                 ? "shortcut-card-cyan"
                 : label === "Facebook"
                   ? "shortcut-card-green"
-                  : "shortcut-card-purple";
+                  : "shortcut-card-blue";
             const iconTone =
               label === "Instagram"
                 ? "shortcut-icon-cyan"
                 : label === "Facebook"
                   ? "shortcut-icon-green"
-                  : "shortcut-icon-purple";
+                  : "shortcut-icon-blue";
             const card = (
               <>
                 <div className={cn("shortcut-icon", iconTone, isStatic && "h-9 w-9 rounded-[14px]")}>
@@ -409,6 +426,7 @@ function FatiCard({ mode, profile }: { mode: CardMode; profile: Profile }) {
 function App() {
   const { mode, profile } = getCardRoute();
   const isStatic = mode === "static";
+  const downloadHref = getDownloadHref();
 
   return (
     <div
@@ -444,7 +462,7 @@ function App() {
           isStatic ? "min-h-[100dvh] px-2.5 py-2" : "min-h-screen px-4 py-6",
         )}
       >
-        <FatiCard mode={mode} profile={profile} />
+        <FatiCard mode={mode} profile={profile} downloadHref={downloadHref} />
       </main>
     </div>
   );
