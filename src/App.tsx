@@ -311,9 +311,19 @@ function FatiCard({
               </Text>
             </div>
 
-            <div className={cn("mini-accent", isStatic && "h-7 w-7 rounded-[10px]")}>
+            <a
+              href={webFallbackHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                "mini-accent",
+                isStatic && "h-7 w-7 rounded-[10px]",
+              )}
+              aria-label="Abrir sitio web de Fati"
+              title="Abrir sitio web de Fati"
+            >
               <ArrowUpRight className="h-[15px] w-[15px] text-black" />
-            </div>
+            </a>
           </div>
         </section>
 
@@ -369,7 +379,7 @@ function FatiCard({
                 key={label}
                 href={href}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className={cardClassName}
               >
                 {card}
