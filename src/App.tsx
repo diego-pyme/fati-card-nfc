@@ -47,7 +47,8 @@ const profiles = {
 const pills = ["Clientes", "Servicios", "Proveedores"];
 const appleAppStoreHref = "https://apps.apple.com/cl/app/fati/id6755729509";
 const webFallbackHref = "https://web.fatiapp.cl/";
-const googlePlayHref: string | null = null;
+const googlePlayHref =
+  "https://play.google.com/store/apps/details?id=cl.fati.app";
 const whatsappHref =
   "https://wa.me/56940017720?text=Hola%20Fati%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20la%20app.";
 
